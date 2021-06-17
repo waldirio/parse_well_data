@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import re
+import sys
 
 def process_info(value):
     field_value = value.replace(" ","").replace("-","")
@@ -80,8 +81,23 @@ def process_info(value):
 
 
 def main():
-    # print("hello")
-    with open("pocos_exemplo","r") as fp:
+
+    if len(sys.argv) == 1:
+        print("Please, pass the well file as parameter")
+        print("exiting now")
+        exit()
+
+    FILE = str(sys.argv[1])
+
+    try:
+        file = open(FILE)
+    except IOError as identifier:
+        print("File not found, please pass the valid path/file")
+        print("exiting now")
+        exit()
+    
+    # with open("pocos_exemplo","r") as fp:
+    with open(FILE,"r") as fp:
         data = fp.read().split("\n")
         # print(data)
         for row in data:
